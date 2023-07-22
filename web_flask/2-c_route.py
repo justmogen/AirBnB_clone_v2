@@ -2,7 +2,7 @@
 """ Starts a Flask web application listening on 0.0.0.0, port 5000
 """
 
-from flask import Flask
+from flask import Flask, escape
 
 app = Flask("__name__")
 
@@ -18,6 +18,10 @@ def hbnb():
     """Returns HBNB"""
     return ("HBNB")
 
+@app.route('/c/<text>', strict_slashes=False)
+def c_route(text):
+    text = escape(text).replace('_', ' ')
+    return f'C {text}'
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=None)
